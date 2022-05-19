@@ -13,8 +13,8 @@
 
 ### 안드로이드 스튜디오에서 프리뷰
 
-Android Studio -> Help -> Find Action ->
-*"Choose Boot Java Runtime for the IDE"* 검색 -> 최신버전 선택 및 다운로드 -> 재시작
+> Android Studio -> Help -> Find Action ->
+"Choose Boot Java Runtime for the IDE"* 검색 -> 최신버전 선택 및 다운로드 -> 재시작
 
 
 ## to do list
