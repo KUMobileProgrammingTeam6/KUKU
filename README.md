@@ -8,7 +8,7 @@
 
 ### 프로젝트 내에서 보는 법
 IDE 우측 상단에서 *Project* 뷰로 설정해야 README.md 파일을 찾을 수 있음
-![image1](./img/image1.png)
+![image1](./img/image1.png?retina)
 
 ### 기본 문법
 * https://www.makeareadme.com/
