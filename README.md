@@ -1,8 +1,16 @@
 # KUKU
 
+## To Do List
+
+- [ ] 깃허브 사용법 익히기
+- [ ] 각자 기여하고 싶은 부분 정하기
+- [ ] overall app architecture design
+- [ ] UI design configuration
+- [ ] web crawling
+- [ ] database design and linkage
+
 ## 코틀린 코딩 표준
 * https://developer.android.com/kotlin/style-guide
-
 
 ## 마크다운 작성하기
 
@@ -16,15 +24,7 @@ IDE 우측 상단에서 *Project* 뷰로 설정해야 README.md 파일을 찾을
 * [백준](https://www.acmicpc.net/blog/view/1)
 * [해시 코드](https://hashcode.co.kr/questions/1772/%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4-%EB%AC%B8%EB%B2%95-%EC%9E%91%EC%84%B1-%ED%8C%81)
 
-### 안드로이드 스튜디오에서 프리뷰
+### 안드로이드 스튜디오에서 프리뷰 기능
 
 > Android Studio -> Help -> Find Action ->
 *"Choose Boot Java Runtime for the IDE"* 검색 -> 최신버전 선택 및 다운로드 -> 재시작
-
-
-## To Do List
-
-- [ ] overall app architecture design
-- [ ] UI design configuration
-- [ ] web crawling
-- [ ] database design and linkage
