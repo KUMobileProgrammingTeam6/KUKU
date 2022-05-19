@@ -4,12 +4,14 @@
 
 - [ ] 깃허브 사용법 익히기
 - [ ] 각자 기여하고 싶은 부분 정하기
-- [ ] overall app architecture design
-- [ ] UI design configuration
-- [ ] web crawling
-- [ ] database design and linkage
+- [ ] 회의록 작성 양식 정하기
+- [ ] 전반적인 앱 아키텍처 디자인(클래스 설계)
+- [ ] UI 디자인 구성(청사진은 카카오 오븐 활용)
+- [ ] 웹 크롤링
+- [ ] DB 모델 설계 및 연동
 
 ## 코틀린 코딩 표준
+
 * https://developer.android.com/kotlin/style-guide
 
 ## 마크다운 작성하기
