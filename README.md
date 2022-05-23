@@ -1,5 +1,5 @@
 # KUKU
-
+[프로젝트 회의록](https://www.notion.so/invite/d4fb9d42b416d97ff30fc4c683e4377732cb6ef4)
 ## To Do List
 
 - [x] 깃허브 사용법 익히기
