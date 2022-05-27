@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/lhc06/Documents/AndroidTP/TP2/app/src/main/res/drawable/edittext_custom.xml" value="0.1525" />
+        <entry key="..\:/Users/lhc06/Documents/AndroidTP/TP2/app/src/main/res/layout/activity_ku_item_show.xml" value="0.33" />
+        <entry key="..\:/Users/lhc06/Documents/AndroidTP/TP2/app/src/main/res/layout/item_show_row.xml" value="0.33" />
         <entry key="..\:/Users/woqkf/Documents/School Life/fourth year/1st/mobile_programming/assignments/team_project/KUKU/app/src/main/res/layout/activity_main.xml" value="0.15932117527862208" />
       </map>
     </option>
