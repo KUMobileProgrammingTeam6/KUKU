@@ -10,9 +10,8 @@
 /.idea/misc.xml
 /.idea/vcs.xml
 
-build.gradle
-
 gradle/wrapper/gradle-wrapper.properties
+
 .DS_Store
 /build
 /captures
