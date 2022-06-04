@@ -1,5 +1,6 @@
 package com.example.kuku.activity
 
+import android.content.Intent
 import android.os.Bundle
 import com.example.kuku.databinding.ActivityKuIntroBinding
 
@@ -8,6 +9,14 @@ class KuIntroActivity : KuActivity<ActivityKuIntroBinding>(ActivityKuIntroBindin
         super.onCreate(savedInstanceState)
     }
 
-    override fun initLayout() {
+    override fun init() {
+        initLayout()
+    }
+
+    private fun initLayout() {
+        binding.itemSearchEntry.setOnClickListener {
+            val intent = Intent(this, KuSearchActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

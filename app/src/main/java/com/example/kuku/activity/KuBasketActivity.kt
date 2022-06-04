@@ -8,6 +8,6 @@ class KuBasketActivity : KuActivity<ActivityKuBasketBinding>(ActivityKuBasketBin
         super.onCreate(savedInstanceState)
     }
 
-    override fun initLayout() {
+    override fun init() {
     }
 }

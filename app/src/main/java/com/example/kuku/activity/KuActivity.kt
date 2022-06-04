@@ -13,8 +13,8 @@ abstract class KuActivity<T: ViewBinding>(private val inflate: (LayoutInflater) 
         super.onCreate(savedInstanceState)
         binding = inflate(layoutInflater)
         setContentView(binding.root)
-        initLayout()
+        init()
     }
 
-    abstract fun initLayout()
+    abstract fun init()
 }

@@ -8,6 +8,6 @@ class KuLocationActivity : KuActivity<ActivityKuLocationBinding>(ActivityKuLocat
         super.onCreate(savedInstanceState)
     }
 
-    override fun initLayout() {
+    override fun init() {
     }
 }

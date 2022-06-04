@@ -8,6 +8,6 @@ class KuItemShowActivity : KuActivity<ActivityKuItemShowBinding>(ActivityKuItemS
         super.onCreate(savedInstanceState)
     }
 
-    override fun initLayout() {
+    override fun init() {
     }
 }
