@@ -23,9 +23,6 @@ class KuSearchActivity : KuActivity<ActivityKuSearchBinding>(ActivityKuSearchBin
         initRecyclerView()
     }
 
-    @Override
-
-
     private fun readFile(sc: Scanner) {
         while (sc.hasNextLine()) {
             val line = sc.nextLine()
