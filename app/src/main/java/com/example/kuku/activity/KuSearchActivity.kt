@@ -19,7 +19,7 @@ class KuSearchActivity : KuActivity<ActivityKuSearchBinding>(ActivityKuSearchBin
     }
 
     override fun init() {
-        loadData()
+        initData()
         initRecyclerView()
     }
 
@@ -39,7 +39,7 @@ class KuSearchActivity : KuActivity<ActivityKuSearchBinding>(ActivityKuSearchBin
         }
     }
 
-    private fun loadData() {
+    private fun initData() {
         readFile(Scanner(resources.openRawResource(R.raw.items)))
     }
 
