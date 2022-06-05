@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kuku.R
 import com.example.kuku.data.KuData
 import com.example.kuku.databinding.ActivityKuSearchBinding
+import com.example.kuku.db.KuDbHelper
 import com.example.kuku.recyclerview.KuAdapter
 import org.json.JSONObject
 import java.util.*
@@ -13,6 +14,7 @@ import kotlin.collections.ArrayList
 
 class KuSearchActivity : KuActivity<ActivityKuSearchBinding>(ActivityKuSearchBinding::inflate) {
     private lateinit var adapter: KuAdapter
+    private lateinit var kuDbHelper: KuDbHelper
     private val data: ArrayList<KuData> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +26,16 @@ class KuSearchActivity : KuActivity<ActivityKuSearchBinding>(ActivityKuSearchBin
         initRecyclerView()
     }
 
-    private fun readFile(sc: Scanner) {
+    // 데이터 베이스로 옮겼기 때문에 readFile()과 writeDatabase()는 주석처리.
+    // 어플에서 처음 실행 시에는 readDatabase()는 주석 처리하고 readFile()과 writeDatabase()만 호출하여 DB 채워주고 다시 주석 처리하시면 됩니다.
+    private fun initData() {
+//        readFile(Scanner(resources.openRawResource(R.raw.items)), data)
+        kuDbHelper = KuDbHelper(this)
+//        writeDatabase(kuDbHelper, data)
+        readDatabase(kuDbHelper, data)
+    }
+
+    private fun readFile(sc: Scanner, data: ArrayList<KuData>) {
         while (sc.hasNextLine()) {
             val line = sc.nextLine()!!
             val jsonObject = JSONObject(line)
@@ -39,8 +50,12 @@ class KuSearchActivity : KuActivity<ActivityKuSearchBinding>(ActivityKuSearchBin
         }
     }
 
-    private fun initData() {
-        readFile(Scanner(resources.openRawResource(R.raw.items)))
+    private fun readDatabase(kuDbHelper: KuDbHelper, data: ArrayList<KuData>) {
+        kuDbHelper.getAllRecord(data)
+    }
+
+    private fun writeDatabase(kuDbHelper: KuDbHelper, data: ArrayList<KuData>) {
+        data.forEach { kuDbHelper.insertProduct(it) }
     }
 
     private fun initRecyclerView() {
