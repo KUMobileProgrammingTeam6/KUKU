@@ -14,6 +14,15 @@
         android:theme="@style/Theme.KUKU"
         tools:targetApi="31">
         <activity
+            android:name=".activity.KuBasketActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.KuLocationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.KuItemShowActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.KuSearchActivity"
             android:exported="false" />
         <activity
