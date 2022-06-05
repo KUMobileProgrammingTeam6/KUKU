@@ -7,7 +7,6 @@ import androidx.viewbinding.ViewBinding
 
 abstract class KuActivity<T: ViewBinding>(private val inflate: (LayoutInflater) -> T) : AppCompatActivity() {
     protected lateinit var binding: T
-        protected set
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
