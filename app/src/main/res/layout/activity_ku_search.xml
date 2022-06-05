@@ -48,7 +48,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="GS25 평촌신성점"
+                    android:text="KU 건대점"
                     android:textColor="#1C2626"
                     android:textSize="25sp"
                     android:textStyle="bold" />
