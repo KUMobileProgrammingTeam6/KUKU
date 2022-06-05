@@ -1,5 +1,6 @@
 package com.example.kuku.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kuku.R
@@ -25,7 +26,7 @@ class KuSearchActivity : KuActivity<ActivityKuSearchBinding>(ActivityKuSearchBin
 
     private fun readFile(sc: Scanner) {
         while (sc.hasNextLine()) {
-            val line = sc.nextLine()
+            val line = sc.nextLine()!!
             val jsonObject = JSONObject(line)
             val id = jsonObject.getInt("id")
             val name = jsonObject.getString("text")
@@ -33,9 +34,8 @@ class KuSearchActivity : KuActivity<ActivityKuSearchBinding>(ActivityKuSearchBin
             val description = jsonObject.getString("explain")
             val keywords = jsonObject.getJSONArray("tags").toString().split(", ").map { it.replace("[", "").replace("]", "").replace("\"", "") }
             val imgUrl = jsonObject.getString("imgUrl")
-//            System.out.println(id.toString() + ", " + name+ ", " + price+ ", " + description+ ", " + keywords+ ", " + imgUrl)
             data.add(KuData(id, name, price, description, keywords, imgUrl, 1, 1))
-            System.out.println(data.get(data.size - 1))
+//            System.out.println(data.get(data.size - 1))
         }
     }
 
@@ -47,7 +47,9 @@ class KuSearchActivity : KuActivity<ActivityKuSearchBinding>(ActivityKuSearchBin
         adapter = KuAdapter(data)
         adapter.itemClickListener = object : KuAdapter.OnItemClickListener {
             override fun onItemClick(data: KuData) {
-                TODO("Not yet implemented")
+                val intent = Intent(this@KuSearchActivity, KuItemShowActivity::class.java)
+                intent.putExtra("data", data)
+                startActivity(intent)
             }
         }
         binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
