@@ -18,5 +18,11 @@ class KuIntroActivity : KuActivity<ActivityKuIntroBinding>(ActivityKuIntroBindin
             val intent = Intent(this, KuSearchActivity::class.java)
             startActivity(intent)
         }
+
+        binding.basketEntry.setOnClickListener {
+            val intent = Intent(this, KuBasketActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }
