@@ -3,14 +3,12 @@ package com.example.kuku.recyclerview
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.kuku.R
 import com.example.kuku.data.KuData
 import com.example.kuku.databinding.ItemShowRowBinding
 
-class KuAdapter(private var items: ArrayList<KuData>) : RecyclerView.Adapter<KuAdapter.ViewHolder>() {
+class KuAdapterBasket (private var items: ArrayList<KuData>) : RecyclerView.Adapter<KuAdapterBasket.ViewHolder>() {
     var itemClickListener: OnItemClickListener? = null
 
     interface OnItemClickListener {
@@ -21,7 +19,7 @@ class KuAdapter(private var items: ArrayList<KuData>) : RecyclerView.Adapter<KuA
     inner class ViewHolder(val binding: ItemShowRowBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
             // Define click listener for the ViewHolder's View.
-            binding.itemLayout.setOnClickListener {
+            binding.deleteBtn.setOnClickListener {
                 itemClickListener?.onItemClick(items[adapterPosition])
             }
         }
@@ -43,7 +41,7 @@ class KuAdapter(private var items: ArrayList<KuData>) : RecyclerView.Adapter<KuA
         holder.binding.productPrice.text = data.price.toString() + "원"
         holder.binding.productStock.text = data.stock.toString() + "개"
         Glide.with(holder.binding.root).load(data.imgUrl).into(holder.binding.productImage)
-        holder.binding.deleteBtn.visibility = View.GONE
+        //holder.binding.deleteBtn.visibility = View.GONE
     }
 
     override fun getItemCount(): Int {

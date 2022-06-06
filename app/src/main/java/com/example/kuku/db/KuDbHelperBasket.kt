@@ -5,14 +5,12 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.provider.BaseColumns
+import android.util.Log
 import com.example.kuku.data.KuData
-import com.example.kuku.db.KuDbHelper.Companion.COL_ID
-import com.example.kuku.db.KuDbHelper.Companion.COL_NAME
 
-class KuDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME,null, DB_VERSION) {
+class KuDbHelperBasket(context: Context) : SQLiteOpenHelper(context, DB_NAME,null, DB_VERSION) {
     companion object {
-        const val DB_NAME = "kuku.db"
+        const val DB_NAME = "kuku2.db"
         const val DB_VERSION = 1
 
         const val TABLE_NAME = "entry"
@@ -26,7 +24,7 @@ class KuDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME,null, DB_
 
         private const val SQL_CREATE_ENTRIES =
             //"CREATE TABLE IF NOT EXISTS ${TABLE_NAME}(" +
-                    "${COL_ID} INTEGER PRIMARY KEY, " +
+            "${COL_ID} INTEGER PRIMARY KEY, " +
                     "${COL_NAME} TEXT, " +
                     "${COL_PRICE} INTEGER, " +
                     "${COL_DESCRIPTION} TEXT, " +
@@ -53,6 +51,35 @@ class KuDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME,null, DB_
         readCursor(cursor, data)
         cursor.close()
         db.close()
+    }
+
+    /*fun searchProductName(targetText: String): ArrayList<KuData> {
+        val db = this.readableDatabase
+        val selection = "${COL_NAME} LIKE ?"
+        val selectionArgs = arrayOf("%" + targetText + "%")
+        val sortOrder = "${COL_ID} DESC"
+        val cursor = db.query(TABLE_NAME, null, selection, selectionArgs, null, null, sortOrder)
+        val data: ArrayList<KuData> = ArrayList()
+        readCursor(cursor, data)
+        cursor.close()
+        db.close()
+        return data
+    }*/
+
+
+    fun deleteProduct(id: String): Boolean {
+        val strsql = "select * from $TABLE_NAME where $COL_ID='$id';"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(strsql, null)
+
+        val flag = cursor.count!=0
+        if (flag) {
+            cursor.moveToFirst()
+            db.delete(TABLE_NAME, "$COL_ID=?", arrayOf(id))
+        }
+        cursor.close()
+        db.close()
+        return flag
     }
 
     fun insertProduct(data: KuData): Boolean {

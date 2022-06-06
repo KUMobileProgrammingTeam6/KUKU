@@ -31,9 +31,10 @@ class KuSearchActivity : KuActivity<ActivityKuSearchBinding>(ActivityKuSearchBin
     // 데이터 베이스로 옮겼기 때문에 readFile()과 writeDatabase()는 주석처리.
     // 어플에서 처음 실행 시에는 readDatabase()는 주석 처리하고 readFile()과 writeDatabase()만 호출하여 DB 채워주고 다시 주석 처리하시면 됩니다.
     private fun initData() {
+
         //readFile(Scanner(resources.openRawResource(R.raw.items7)), data, 7)
         kuDbHelper = KuDbHelper(this)
-        //writeDatabase(kuDbHelper, data)
+        /*writeDatabase(kuDbHelper, data)*/
         readDatabase(kuDbHelper, data)
     }
 

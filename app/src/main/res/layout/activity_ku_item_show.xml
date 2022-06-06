@@ -108,7 +108,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="20dp"
                 app:layout_constraintTop_toBottomOf="@+id/product_detail_tv">
 
                 <TextView
@@ -123,6 +123,7 @@
                     android:id="@+id/product_tag_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginStart="15dp"
                     android:text="김밥"
                     android:textSize="15sp"
@@ -135,7 +136,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="20dp"
                 app:layout_constraintTop_toBottomOf="@id/product_tags_layout">
 
                 <TextView
@@ -152,6 +153,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
+                    android:layout_gravity="center_vertical"
                     android:text="* 재고: 3개"
                     android:textSize="15sp"
                     />
@@ -169,6 +171,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_margin="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -177,10 +180,12 @@
             android:id="@+id/search_loc_btn"
             android:layout_width="0dp"
             android:layout_height="50dp"
+            android:layout_marginRight="10dp"
             android:text="위치 검색"
             android:backgroundTint="@color/teal_200"
             android:textColor="@color/white"
             android:textSize="18sp"
+            android:textStyle="bold"
             android:layout_weight="1"
             />
 
@@ -192,6 +197,7 @@
             android:backgroundTint="@color/teal_200"
             android:textColor="@color/white"
             android:textSize="18sp"
+            android:textStyle="bold"
             android:layout_weight="1"
             />
 

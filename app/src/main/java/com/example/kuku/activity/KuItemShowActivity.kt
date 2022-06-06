@@ -2,11 +2,15 @@ package com.example.kuku.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.kuku.data.KuData
 import com.example.kuku.databinding.ActivityKuItemShowBinding
+import com.example.kuku.db.KuDbHelper
+import com.example.kuku.db.KuDbHelperBasket
 
 class KuItemShowActivity : KuActivity<ActivityKuItemShowBinding>(ActivityKuItemShowBinding::inflate) {
+    lateinit var kuDbHelperBasket: KuDbHelperBasket
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -25,7 +29,17 @@ class KuItemShowActivity : KuActivity<ActivityKuItemShowBinding>(ActivityKuItemS
         Glide.with(binding.root).load(data.imgUrl).into(binding.productIv) //이미지
 
         binding.productBackIv.setOnClickListener {
-            val intent = Intent(this, KuSearchActivity::class.java)
+            onBackPressed()
+        }
+
+        binding.productBasketIv.setOnClickListener {
+            val intent = Intent(this, KuBasketActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.productHomeIv.setOnClickListener {
+            val intent = Intent(this, KuIntroActivity::class.java)
+            finishAffinity()
             startActivity(intent)
         }
 
@@ -34,9 +48,15 @@ class KuItemShowActivity : KuActivity<ActivityKuItemShowBinding>(ActivityKuItemS
 //            startActivity(intent)
         }
 
+        kuDbHelperBasket = KuDbHelperBasket(this)
         binding.addBasketBtn.setOnClickListener {
-//            val intent = Intent(this, KuBasketActivity::class.java)
-//            startActivity(intent)
+            val result = kuDbHelperBasket.insertProduct(data)
+            if (result) {
+                Toast.makeText(this@KuItemShowActivity, "장바구니에 추가 성공", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this@KuItemShowActivity, "이미 장바구니에 있습니다.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
+
 }
