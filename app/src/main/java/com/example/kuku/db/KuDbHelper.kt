@@ -63,9 +63,11 @@ class KuDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME,null, DB_
         values.put(COL_DESCRIPTION, data.description)
         values.put(COL_TAG, data.tag.toString())
         values.put(COL_IMG_URL, data.imgUrl)
-//        System.out.println("values = " + values)
         val db = this.writableDatabase
         val ok = db.insert(TABLE_NAME, null, values) > 0
+        if (!ok) {
+            System.out.println("values = " + values)
+        }
         db.close()
         return ok
     }
@@ -82,7 +84,7 @@ class KuDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME,null, DB_
                 val price = getInt(2)
                 val description = getString(3)
                 val tag = getString(4).split(", ").map { it.replace("[", "").replace("]", "").replace("\"", "") }
-                val imgUrl = getString(5)
+                val imgUrl = getString(5).replace("http:", "")
                 val curData = KuData(id, name, price, description, tag, imgUrl, 1, 1)
 //                System.out.println(curData)
                 data.add(curData)

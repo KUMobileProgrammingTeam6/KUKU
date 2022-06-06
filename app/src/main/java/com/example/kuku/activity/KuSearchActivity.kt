@@ -31,13 +31,13 @@ class KuSearchActivity : KuActivity<ActivityKuSearchBinding>(ActivityKuSearchBin
     // 데이터 베이스로 옮겼기 때문에 readFile()과 writeDatabase()는 주석처리.
     // 어플에서 처음 실행 시에는 readDatabase()는 주석 처리하고 readFile()과 writeDatabase()만 호출하여 DB 채워주고 다시 주석 처리하시면 됩니다.
     private fun initData() {
-//        readFile(Scanner(resources.openRawResource(R.raw.items)), data)
+//        readFile(Scanner(resources.openRawResource(R.raw.items7)), data, 7)
         kuDbHelper = KuDbHelper(this)
 //        writeDatabase(kuDbHelper, data)
         readDatabase(kuDbHelper, data)
     }
 
-    private fun readFile(sc: Scanner, data: ArrayList<KuData>) {
+    private fun readFile(sc: Scanner, data: ArrayList<KuData>, location: Int) {
         while (sc.hasNextLine()) {
             val line = sc.nextLine()!!
             val jsonObject = JSONObject(line)
@@ -47,7 +47,7 @@ class KuSearchActivity : KuActivity<ActivityKuSearchBinding>(ActivityKuSearchBin
             val description = jsonObject.getString("explain")
             val keywords = jsonObject.getJSONArray("tags").toString().split(", ").map { it.replace("[", "").replace("]", "").replace("\"", "") }
             val imgUrl = jsonObject.getString("imgUrl")
-            data.add(KuData(id, name, price, description, keywords, imgUrl, 1, 1))
+            data.add(KuData(id, name, price, description, keywords, imgUrl, 1, location))
 //            System.out.println(data.get(data.size - 1))
         }
     }
@@ -71,6 +71,7 @@ class KuSearchActivity : KuActivity<ActivityKuSearchBinding>(ActivityKuSearchBin
         }
         binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.recyclerView.adapter = adapter
+        Toast.makeText(this, "총 ${data.size} 개의 상품이 조회되었습니다.", Toast.LENGTH_SHORT).show()
     }
 
     private fun initLayout() {
@@ -86,6 +87,7 @@ class KuSearchActivity : KuActivity<ActivityKuSearchBinding>(ActivityKuSearchBin
                 Toast.makeText(this, "조회된 상품이 없습니다.", Toast.LENGTH_SHORT).show()
             }
             adapter.changeItems(newData)
+            Toast.makeText(this, "총 ${newData.size} 개의 상품이 검색되었습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 }

@@ -19,6 +19,7 @@ class KuItemShowActivity : KuActivity<ActivityKuItemShowBinding>(ActivityKuItemS
         val data = intent.getSerializableExtra("data") as KuData
         binding.productProductNameTv.text = data.name // 제품명
         binding.productDetailTv.text = data.description //제품설명
+        binding.productTagTv.text = data.tag.toString().replace("[", "").replace("]", "").replace(",", "") // 제품 태그
         binding.productPriceTv.text = data.price.toString() + "원" //제품가격
         binding.productStockTv.text = "재고: " + data.stock.toString() + "개" //제품재고
         Glide.with(binding.root).load(data.imgUrl).into(binding.productIv) //이미지
