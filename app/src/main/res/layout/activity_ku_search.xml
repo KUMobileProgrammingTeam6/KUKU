@@ -70,7 +70,7 @@
                     android:ems="10" />
 
                 <Button
-                    android:id="@+id/searchBTN"
+                    android:id="@+id/searchBtn"
                     android:layout_width="0dp"
                     android:layout_height="47dp"
                     android:layout_marginLeft="10dp"

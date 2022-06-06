@@ -2,6 +2,7 @@ package com.example.kuku.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kuku.R
 import com.example.kuku.data.KuData
@@ -24,6 +25,7 @@ class KuSearchActivity : KuActivity<ActivityKuSearchBinding>(ActivityKuSearchBin
     override fun init() {
         initData()
         initRecyclerView()
+        initLayout()
     }
 
     // 데이터 베이스로 옮겼기 때문에 readFile()과 writeDatabase()는 주석처리.
@@ -69,5 +71,21 @@ class KuSearchActivity : KuActivity<ActivityKuSearchBinding>(ActivityKuSearchBin
         }
         binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.recyclerView.adapter = adapter
+    }
+
+    private fun initLayout() {
+        binding.searchBtn.setOnClickListener {
+            // get searchBar's text
+            val inputText = binding.editText1.text.toString()
+            if (inputText.isEmpty()) {
+                Toast.makeText(this, "검색어를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            val newData = kuDbHelper.searchProductName(inputText)
+            if (newData.isEmpty()) {
+                Toast.makeText(this, "조회된 상품이 없습니다.", Toast.LENGTH_SHORT).show()
+            }
+            adapter.changeItems(newData)
+        }
     }
 }

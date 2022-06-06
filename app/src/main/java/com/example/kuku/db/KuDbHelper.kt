@@ -24,8 +24,6 @@ class KuDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME,null, DB_
         const val COL_TAG = "tag"
         const val COL_IMG_URL = "img_url"
 
-//        val projection = arrayOf(COL_ID, COL_NAME, COL_PRICE, COL_DESCRIPTION, COL_TAG, COL_IMG_URL)
-
         private const val SQL_CREATE_ENTRIES =
             "CREATE TABLE IF NOT EXISTS ${TABLE_NAME}(" +
                     "${COL_ID} INTEGER PRIMARY KEY, " +
@@ -37,7 +35,7 @@ class KuDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME,null, DB_
         private const val SQL_DROP_TABLE =
             "DROP TABLE IF EXISTS ${TABLE_NAME};"
         private const val SQL_GET_ALL =
-            "SELECT * FROM ${TABLE_NAME}"
+            "SELECT * FROM ${TABLE_NAME} ORDER BY ${COL_ID} DESC;"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -75,6 +73,7 @@ class KuDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME,null, DB_
     private fun readCursor(cursor: Cursor, data: ArrayList<KuData>) {
         with(cursor) {
             if (count == 0) {
+                System.out.println("the cursor is empty")
                 return
             }
             while (moveToNext()) {
@@ -85,9 +84,23 @@ class KuDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME,null, DB_
                 val tag = getString(4).split(", ").map { it.replace("[", "").replace("]", "").replace("\"", "") }
                 val imgUrl = getString(5)
                 val curData = KuData(id, name, price, description, tag, imgUrl, 1, 1)
-//                System.out.println("" + curData + " was pushed")
+//                System.out.println(curData)
                 data.add(curData)
             }
         }
+    }
+
+    // search text in db by like '%text%'
+    fun searchProductName(targetText: String): ArrayList<KuData> {
+        val db = this.readableDatabase
+        val selection = "${COL_NAME} LIKE ?"
+        val selectionArgs = arrayOf("%" + targetText + "%")
+        val sortOrder = "${COL_ID} DESC"
+        val cursor = db.query(TABLE_NAME, null, selection, selectionArgs, null, null, sortOrder)
+        val data: ArrayList<KuData> = ArrayList()
+        readCursor(cursor, data)
+        cursor.close()
+        db.close()
+        return data
     }
 }

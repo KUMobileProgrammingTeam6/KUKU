@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.example.kuku.data.KuData
 import com.example.kuku.databinding.ItemShowRowBinding
 
-class KuAdapter(private val items: ArrayList<KuData>) : RecyclerView.Adapter<KuAdapter.ViewHolder>() {
+class KuAdapter(private var items: ArrayList<KuData>) : RecyclerView.Adapter<KuAdapter.ViewHolder>() {
     var itemClickListener: OnItemClickListener? = null
 
     interface OnItemClickListener {
@@ -44,5 +44,10 @@ class KuAdapter(private val items: ArrayList<KuData>) : RecyclerView.Adapter<KuA
 
     override fun getItemCount(): Int {
         return items.size
+    }
+
+    fun changeItems(newData: ArrayList<KuData>) {
+        items = newData
+        notifyDataSetChanged()
     }
 }
