@@ -46,10 +46,15 @@
                         android:layout_width="230dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="5dp"
                         android:text="햄)매콤판타스틱치킨버거"
+                        android:shadowColor="#A2A2A2"
+                        android:shadowDx="2.0"
+                        android:shadowDy="2.0"
+                        android:shadowRadius="2.0"
+                        android:fontFamily="@font/happiness_sans_regular"
                         android:textColor="#011826"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -82,12 +87,16 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/wooridaumr"
                         android:text="가격 :" />
                     <TextView
                         android:id="@+id/productPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/wooridaumr"
                         android:layout_marginLeft="7dp"
                         android:text="2,200원" />
                 </LinearLayout>
@@ -95,17 +104,21 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="8"
+                    android:layout_weight="6"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/wooridaumr"
                         android:text="재고 :" />
                     <TextView
                         android:id="@+id/productStock"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/wooridaumr"
                         android:layout_marginLeft="7dp"
                         android:text="1개" />
                 </LinearLayout>

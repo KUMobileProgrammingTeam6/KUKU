@@ -3,6 +3,7 @@ package com.example.kuku.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kuku.data.KuData
@@ -19,6 +20,7 @@ class KuBasketActivity : KuActivity<ActivityKuBasketBinding>(ActivityKuBasketBin
     private lateinit var adapter: KuAdapterBasket
     private lateinit var kuDbHelperBasket: KuDbHelperBasket
     private var data: ArrayList<KuData> = ArrayList()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,9 +53,11 @@ class KuBasketActivity : KuActivity<ActivityKuBasketBinding>(ActivityKuBasketBin
 
                 val result = kuDbHelperBasket.deleteProduct(id)
                 if (result) {
-                    Toast.makeText(this@KuBasketActivity, "삭제 성공", Toast.LENGTH_SHORT).show()
+                    toastMessage(this@KuBasketActivity, "장바구니에서 삭제되었습니다.")
+                    //Toast.makeText(this@KuBasketActivity, "장바구니에서 삭제되었습니다.", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(this@KuBasketActivity, "삭제 실패", Toast.LENGTH_SHORT).show()
+                    toastMessage(this@KuBasketActivity, "삭제 실패하였습니다.\n다시 시도해주세요.")
+                    //Toast.makeText(this@KuBasketActivity, "삭제 실패하였습니다.\n다시 시도해주세요.", Toast.LENGTH_SHORT).show()
                 }
                 data = ArrayList()
                 init()

@@ -52,9 +52,11 @@ class KuItemShowActivity : KuActivity<ActivityKuItemShowBinding>(ActivityKuItemS
         binding.addBasketBtn.setOnClickListener {
             val result = kuDbHelperBasket.insertProduct(data)
             if (result) {
-                Toast.makeText(this@KuItemShowActivity, "장바구니에 추가 성공", Toast.LENGTH_SHORT).show()
+                toastMessage(this@KuItemShowActivity, "장바구니에 추가되었습니다.")
+                //Toast.makeText(this@KuItemShowActivity, "장바구니에 추가되었습니다.", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this@KuItemShowActivity, "이미 장바구니에 있습니다.", Toast.LENGTH_SHORT).show()
+                toastMessage(this@KuItemShowActivity, "이미 장바구니에 있습니다.")
+                //Toast.makeText(this@KuItemShowActivity, "이미 장바구니에 있습니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }

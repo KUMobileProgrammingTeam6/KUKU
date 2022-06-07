@@ -53,14 +53,16 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/topbar"
+        android:layout_marginTop="30dp"
         app:layout_constraintBottom_toTopOf="@id/bottom_btn"
-        android:layout_marginTop="5dp"
-        >
+        app:layout_constraintTop_toBottomOf="@id/topbar"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <ImageView
                 android:id="@+id/product_iv"
                 android:layout_width="200dp"
@@ -77,47 +79,51 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="김) 확실한 참치 김밥(신)"
+                android:fontFamily="@font/happiness_sans_title"
+                android:text="김) 확실한 참치 김밥(신)100"
                 android:textColor="@color/black"
-                android:textSize="23sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@id/product_detail_tv"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/product_iv" />
 
-
-
             <TextView
                 android:id="@+id/product_detail_tv"
-                android:layout_width="310dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
-                android:text="참치 토핑이 더 듬뿍 들어가 CU 대표 시그니처 김밥"
-                android:textSize="15sp"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="30dp"
-                app:layout_constraintTop_toBottomOf="@id/product_productName_tv"
+                android:fontFamily="@font/ridibatang"
+                android:textAlignment="center"
+                android:text="참치 토핑이 더 듬뿍 들어가 CU 대표 시그니처 김밥"
+                android:lineSpacingExtra="5dp"
+                android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/product_productName_tv" />
 
             <LinearLayout
                 android:id="@+id/product_tags_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/product_detail_tv">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="태그"
-                    android:textSize="22sp"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/wooridaumr"
                     android:textColor="@color/black"
-                    />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/product_tag_tv"
@@ -126,17 +132,16 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="15dp"
                     android:text="김밥"
-                    android:textSize="15sp"
-                    />
+                    android:textSize="15sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/product_tags_layout">
 
                 <TextView
@@ -144,27 +149,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" 2,800원"
-                    android:textSize="22sp"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/wooridaumb"
                     android:textColor="@color/black"
-                    />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/product_stock_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginStart="15dp"
                     android:text="* 재고: 3개"
-                    android:textSize="15sp"
-                    />
+                    android:textSize="15sp" />
             </LinearLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
-
 
     <LinearLayout
         android:id="@+id/bottom_btn"
@@ -182,10 +185,10 @@
             android:layout_height="50dp"
             android:layout_marginRight="10dp"
             android:text="위치 검색"
+            android:fontFamily="@font/wooridaumb"
             android:backgroundTint="@color/teal_200"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:textSize="16sp"
             android:layout_weight="1"
             />
 
@@ -194,10 +197,10 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:text="장바구니 담기"
+            android:fontFamily="@font/wooridaumb"
             android:backgroundTint="@color/teal_200"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:textSize="16sp"
             android:layout_weight="1"
             />
 

@@ -2,6 +2,8 @@ package com.example.kuku.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kuku.R
@@ -72,23 +74,28 @@ class KuSearchActivity : KuActivity<ActivityKuSearchBinding>(ActivityKuSearchBin
         }
         binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.recyclerView.adapter = adapter
-        Toast.makeText(this, "총 ${data.size} 개의 상품이 조회되었습니다.", Toast.LENGTH_SHORT).show()
+        toastMessage(this@KuSearchActivity, "총 ${data.size} 개의 상품이 조회되었습니다.")
+        //Toast.makeText(this, "총 ${data.size} 개의 상품이 조회되었습니다.", Toast.LENGTH_SHORT).show()
     }
 
     private fun initLayout() {
         binding.searchBtn.setOnClickListener {
             // get searchBar's text
+
             val inputText = binding.editText1.text.toString()
             if (inputText.isEmpty()) {
-                Toast.makeText(this, "검색어를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                toastMessage(this@KuSearchActivity, "검색어를 입력해주세요.")
+                //Toast.makeText(this, "검색어를 입력해주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             val newData = kuDbHelper.searchProductName(inputText)
             if (newData.isEmpty()) {
-                Toast.makeText(this, "조회된 상품이 없습니다.", Toast.LENGTH_SHORT).show()
+                toastMessage(this@KuSearchActivity, "조회된 상품이 없습니다.")
+                //Toast.makeText(this, "조회된 상품이 없습니다.", Toast.LENGTH_SHORT).show()
             }
             adapter.changeItems(newData)
-            Toast.makeText(this, "총 ${newData.size} 개의 상품이 검색되었습니다.", Toast.LENGTH_SHORT).show()
+            toastMessage(this@KuSearchActivity, "총 ${newData.size} 개의 상품이 검색되었습니다.")
+            //Toast.makeText(this, "총 ${newData.size} 개의 상품이 검색되었습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 }
