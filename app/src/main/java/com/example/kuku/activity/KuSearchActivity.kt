@@ -1,26 +1,20 @@
 package com.example.kuku.activity
 
 import android.content.Intent
-import android.os.Bundle
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kuku.R
+import com.example.kuku.app.KuToastMessage
 import com.example.kuku.data.KuData
 import com.example.kuku.databinding.ActivityKuSearchBinding
 import com.example.kuku.db.KuDbHelper
 import com.example.kuku.recyclerview.KuAdapter
 import org.json.JSONObject
 import java.util.*
-import kotlin.collections.ArrayList
 
 class KuSearchActivity : KuActivity<ActivityKuSearchBinding>(ActivityKuSearchBinding::inflate) {
     private lateinit var adapter: KuAdapter
     private lateinit var kuDbHelper: KuDbHelper
     private val data: ArrayList<KuData> = ArrayList()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun init() {
         initData()
@@ -28,13 +22,24 @@ class KuSearchActivity : KuActivity<ActivityKuSearchBinding>(ActivityKuSearchBin
         initLayout()
     }
 
-    // 데이터 베이스로 옮겼기 때문에 readFile()과 writeDatabase()는 주석처리.
-    // 어플에서 처음 실행 시에는 readDatabase()는 주석 처리하고 readFile()과 writeDatabase()만 호출하여 DB 채워주고 다시 주석 처리하시면 됩니다.
+    // APK 배포시 kuku.db를 제공할 수 있는 방안 찾기
     private fun initData() {
-//        readFile(Scanner(resources.openRawResource(R.raw.items7)), data, 7)
         kuDbHelper = KuDbHelper(this)
-//        writeDatabase(kuDbHelper, data)
         readDatabase(kuDbHelper, data)
+        assert(data.isNotEmpty())
+        /*
+        if (data.isEmpty()) {
+            readFile(Scanner(resources.openRawResource(R.raw.items1)), data, 100)
+            readFile(Scanner(resources.openRawResource(R.raw.items2)), data, 200)
+            readFile(Scanner(resources.openRawResource(R.raw.items3)), data, 300)
+            readFile(Scanner(resources.openRawResource(R.raw.items4)), data, 400)
+            readFile(Scanner(resources.openRawResource(R.raw.items5)), data, 500)
+            readFile(Scanner(resources.openRawResource(R.raw.items6)), data, 600)
+            readFile(Scanner(resources.openRawResource(R.raw.items7)), data, 700)
+            println(String.format("data's size = %d", data.size))
+            writeDatabase(kuDbHelper, data)
+        }
+         */
     }
 
     private fun readFile(sc: Scanner, data: ArrayList<KuData>, location: Int) {
@@ -71,7 +76,7 @@ class KuSearchActivity : KuActivity<ActivityKuSearchBinding>(ActivityKuSearchBin
         }
         binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.recyclerView.adapter = adapter
-        Toast.makeText(this, "총 ${data.size} 개의 상품이 조회되었습니다.", Toast.LENGTH_SHORT).show()
+        KuToastMessage(this@KuSearchActivity, "총 ${data.size} 개의 상품이 조회되었습니다.")
     }
 
     private fun initLayout() {
@@ -79,15 +84,15 @@ class KuSearchActivity : KuActivity<ActivityKuSearchBinding>(ActivityKuSearchBin
             // get searchBar's text
             val inputText = binding.editText1.text.toString()
             if (inputText.isEmpty()) {
-                Toast.makeText(this, "검색어를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                KuToastMessage(this@KuSearchActivity, "검색어를 입력해주세요.")
                 return@setOnClickListener
             }
             val newData = kuDbHelper.searchProductName(inputText)
             if (newData.isEmpty()) {
-                Toast.makeText(this, "조회된 상품이 없습니다.", Toast.LENGTH_SHORT).show()
+                KuToastMessage(this@KuSearchActivity, "조회된 상품이 없습니다.")
             }
             adapter.changeItems(newData)
-            Toast.makeText(this, "총 ${newData.size} 개의 상품이 검색되었습니다.", Toast.LENGTH_SHORT).show()
+            KuToastMessage(this@KuSearchActivity, "총 ${newData.size} 개의 상품이 검색되었습니다.")
         }
     }
 }
