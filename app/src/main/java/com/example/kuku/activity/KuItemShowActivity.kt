@@ -1,15 +1,14 @@
 package com.example.kuku.activity
 
 import android.content.Intent
-import android.os.Bundle
 import com.bumptech.glide.Glide
+import com.example.kuku.app.KuToastMessage
 import com.example.kuku.data.KuData
 import com.example.kuku.databinding.ActivityKuItemShowBinding
+import com.example.kuku.db.KuDbHelperBasket
 
 class KuItemShowActivity : KuActivity<ActivityKuItemShowBinding>(ActivityKuItemShowBinding::inflate) {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var kuDbHelperBasket: KuDbHelperBasket
 
     override fun init() {
         initLayout()
@@ -25,18 +24,36 @@ class KuItemShowActivity : KuActivity<ActivityKuItemShowBinding>(ActivityKuItemS
         Glide.with(binding.root).load(data.imgUrl).into(binding.productIv) //이미지
 
         binding.productBackIv.setOnClickListener {
-            val intent = Intent(this, KuSearchActivity::class.java)
+            onBackPressed()
+        }
+
+        binding.productBasketIv.setOnClickListener {
+            val intent = Intent(this, KuBasketActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.productHomeIv.setOnClickListener {
+            val intent = Intent(this, KuIntroActivity::class.java)
+            finishAffinity()
             startActivity(intent)
         }
 
         binding.searchLocBtn.setOnClickListener {
-//            val intent = Intent(this, KuLocationActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(this, KuLocationActivity::class.java)
+            val items = ArrayList<KuData>()
+            items.add(data)
+            intent.putExtra("items", items)
+            startActivity(intent)
         }
 
+        kuDbHelperBasket = KuDbHelperBasket(this)
         binding.addBasketBtn.setOnClickListener {
-//            val intent = Intent(this, KuBasketActivity::class.java)
-//            startActivity(intent)
+            val result = kuDbHelperBasket.insertProduct(data)
+            if (result) {
+                KuToastMessage(this@KuItemShowActivity, "장바구니에 추가되었습니다.")
+            } else {
+                KuToastMessage(this@KuItemShowActivity, "이미 장바구니에 있습니다.")
+            }
         }
     }
 }
