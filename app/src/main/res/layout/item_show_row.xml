@@ -12,7 +12,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:background="#F2F2F2"
+        android:background="#FFFFFF"
         android:orientation="horizontal">
 
         <ImageView
@@ -34,17 +34,42 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/productName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="#011826"
-                    android:text="햄)매콤판타스틱치킨버거" />
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/productName"
+                        android:layout_width="230dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:text="햄)매콤판타스틱치킨버거"
+                        android:shadowColor="#A2A2A2"
+                        android:shadowDx="2.0"
+                        android:shadowDy="2.0"
+                        android:shadowRadius="2.0"
+                        android:fontFamily="@font/happiness_sans_regular"
+                        android:textColor="#011826"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/deleteBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_baseline_close_24" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -62,12 +87,16 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/wooridaumr"
                         android:text="가격 :" />
                     <TextView
                         android:id="@+id/productPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/wooridaumr"
                         android:layout_marginLeft="7dp"
                         android:text="2,200원" />
                 </LinearLayout>
@@ -75,17 +104,21 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="8"
+                    android:layout_weight="6"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/wooridaumr"
                         android:text="재고 :" />
                     <TextView
                         android:id="@+id/productStock"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/wooridaumr"
                         android:layout_marginLeft="7dp"
                         android:text="1개" />
                 </LinearLayout>
