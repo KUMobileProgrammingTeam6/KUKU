@@ -5,17 +5,14 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.provider.BaseColumns
 import com.example.kuku.data.KuData
-import com.example.kuku.db.KuDbHelper.Companion.COL_ID
-import com.example.kuku.db.KuDbHelper.Companion.COL_NAME
 
 class KuDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME,null, DB_VERSION) {
     companion object {
         const val DB_NAME = "kuku.db"
         const val DB_VERSION = 1
 
-        const val TABLE_NAME = "entry"
+        const val TABLE_NAME = "product"
 
         const val COL_ID = "id"
         const val COL_NAME = "name"
@@ -23,19 +20,25 @@ class KuDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME,null, DB_
         const val COL_DESCRIPTION = "description"
         const val COL_TAG = "tag"
         const val COL_IMG_URL = "img_url"
+        const val COL_LOCATION = "location"
 
-        private const val SQL_CREATE_ENTRIES =
+        const val SQL_CREATE_ENTRIES =
             "CREATE TABLE IF NOT EXISTS ${TABLE_NAME}(" +
-                    "${COL_ID} INTEGER PRIMARY KEY, " +
-                    "${COL_NAME} TEXT, " +
-                    "${COL_PRICE} INTEGER, " +
-                    "${COL_DESCRIPTION} TEXT, " +
-                    "${COL_TAG} JSON, " +
-                    "${COL_IMG_URL} TEXT);"
-        private const val SQL_DROP_TABLE =
+                    "$COL_ID INTEGER PRIMARY KEY, " +
+                    "$COL_NAME TEXT, " +
+                    "$COL_PRICE INTEGER, " +
+                    "$COL_DESCRIPTION TEXT, " +
+                    "$COL_TAG JSON, " +
+                    "$COL_IMG_URL TEXT, " +
+                    "$COL_LOCATION INTEGER);"
+
+        const val SQL_DROP_TABLE =
             "DROP TABLE IF EXISTS ${TABLE_NAME};"
-        private const val SQL_GET_ALL =
-            "SELECT * FROM ${TABLE_NAME} ORDER BY ${COL_ID} DESC;"
+
+        const val SQL_GET_ALL =
+            "SELECT * FROM $TABLE_NAME ORDER BY $COL_ID DESC;"
+
+        internal const val DEFAULT_STOCK = 1
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -63,11 +66,9 @@ class KuDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME,null, DB_
         values.put(COL_DESCRIPTION, data.description)
         values.put(COL_TAG, data.tag.toString())
         values.put(COL_IMG_URL, data.imgUrl)
+        values.put(COL_LOCATION, data.location)
         val db = this.writableDatabase
         val ok = db.insert(TABLE_NAME, null, values) > 0
-        if (!ok) {
-            System.out.println("values = " + values)
-        }
         db.close()
         return ok
     }
@@ -75,7 +76,7 @@ class KuDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME,null, DB_
     private fun readCursor(cursor: Cursor, data: ArrayList<KuData>) {
         with(cursor) {
             if (count == 0) {
-                System.out.println("the cursor is empty")
+                println("the cursor is empty")
                 return
             }
             while (moveToNext()) {
@@ -85,7 +86,8 @@ class KuDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME,null, DB_
                 val description = getString(3)
                 val tag = getString(4).split(", ").map { it.replace("[", "").replace("]", "").replace("\"", "") }
                 val imgUrl = getString(5).replace("http:", "")
-                val curData = KuData(id, name, price, description, tag, imgUrl, 1, 1)
+                val location = getInt(6)
+                val curData = KuData(id, name, price, description, tag, imgUrl, DEFAULT_STOCK, location)
 //                System.out.println(curData)
                 data.add(curData)
             }
@@ -95,9 +97,9 @@ class KuDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME,null, DB_
     // search text in db by like '%text%'
     fun searchProductName(targetText: String): ArrayList<KuData> {
         val db = this.readableDatabase
-        val selection = "${COL_NAME} LIKE ?"
-        val selectionArgs = arrayOf("%" + targetText + "%")
-        val sortOrder = "${COL_ID} DESC"
+        val selection = "$COL_NAME LIKE ?"
+        val selectionArgs = arrayOf("%$targetText%")
+        val sortOrder = "$COL_ID DESC"
         val cursor = db.query(TABLE_NAME, null, selection, selectionArgs, null, null, sortOrder)
         val data: ArrayList<KuData> = ArrayList()
         readCursor(cursor, data)
