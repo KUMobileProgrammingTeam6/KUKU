@@ -1,6 +1,7 @@
 package com.example.kuku.activity
 
 import android.content.Intent
+import android.text.method.ScrollingMovementMethod
 import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
@@ -39,6 +40,7 @@ class KuLocationActivity : KuActivity<ActivityKuLocationBinding>(ActivityKuLocat
                 600->textF += item.name +"\n     "
                 700->textG += item.name +"\n     "
             }
+
         }
 
 
@@ -70,6 +72,8 @@ class KuLocationActivity : KuActivity<ActivityKuLocationBinding>(ActivityKuLocat
         binding.productBackIv.setOnClickListener {
             onBackPressed()
         }
+
+        binding.maptext.setMovementMethod(ScrollingMovementMethod())
     }
 
     private fun locToPos(location: Int) = location / 100 - 1
