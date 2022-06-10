@@ -26,43 +26,10 @@ class KuSearchActivity : KuActivity<ActivityKuSearchBinding>(ActivityKuSearchBin
     private fun initData() {
         kuDbHelper = KuDbHelper(this)
         readDatabase(kuDbHelper, data)
-        assert(data.isNotEmpty())
-        /*
-        if (data.isEmpty()) {
-            readFile(Scanner(resources.openRawResource(R.raw.items1)), data, 100)
-            readFile(Scanner(resources.openRawResource(R.raw.items2)), data, 200)
-            readFile(Scanner(resources.openRawResource(R.raw.items3)), data, 300)
-            readFile(Scanner(resources.openRawResource(R.raw.items4)), data, 400)
-            readFile(Scanner(resources.openRawResource(R.raw.items5)), data, 500)
-            readFile(Scanner(resources.openRawResource(R.raw.items6)), data, 600)
-            readFile(Scanner(resources.openRawResource(R.raw.items7)), data, 700)
-            println(String.format("data's size = %d", data.size))
-            writeDatabase(kuDbHelper, data)
-        }
-         */
-    }
-
-    private fun readFile(sc: Scanner, data: ArrayList<KuData>, location: Int) {
-        while (sc.hasNextLine()) {
-            val line = sc.nextLine()!!
-            val jsonObject = JSONObject(line)
-            val id = jsonObject.getInt("id")
-            val name = jsonObject.getString("text")
-            val price = jsonObject.getString("price").replace(",", "").toInt()
-            val description = jsonObject.getString("explain")
-            val keywords = jsonObject.getJSONArray("tags").toString().split(", ").map { it.replace("[", "").replace("]", "").replace("\"", "") }
-            val imgUrl = jsonObject.getString("imgUrl")
-            data.add(KuData(id, name, price, description, keywords, imgUrl, 1, location))
-//            System.out.println(data.get(data.size - 1))
-        }
     }
 
     private fun readDatabase(kuDbHelper: KuDbHelper, data: ArrayList<KuData>) {
         kuDbHelper.getAllRecord(data)
-    }
-
-    private fun writeDatabase(kuDbHelper: KuDbHelper, data: ArrayList<KuData>) {
-        data.forEach { kuDbHelper.insertProduct(it) }
     }
 
     private fun initRecyclerView() {

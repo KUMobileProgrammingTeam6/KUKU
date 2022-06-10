@@ -58,21 +58,6 @@ class KuDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME,null, DB_
         db.close()
     }
 
-    fun insertProduct(data: KuData): Boolean {
-        val values = ContentValues()
-        values.put(COL_ID, data.id)
-        values.put(COL_NAME, data.name)
-        values.put(COL_PRICE, data.price)
-        values.put(COL_DESCRIPTION, data.description)
-        values.put(COL_TAG, data.tag.toString())
-        values.put(COL_IMG_URL, data.imgUrl)
-        values.put(COL_LOCATION, data.location)
-        val db = this.writableDatabase
-        val ok = db.insert(TABLE_NAME, null, values) > 0
-        db.close()
-        return ok
-    }
-
     private fun readCursor(cursor: Cursor, data: ArrayList<KuData>) {
         with(cursor) {
             if (count == 0) {
